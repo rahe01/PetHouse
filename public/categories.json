@@ -1,0 +1,40 @@
+[
+    {
+      "id": 1,
+      "name": "Cats",
+      "image": "https://i.ibb.co/k4PtpnB/pexels-peng-louis-587527-1643456.jpg",
+      "description": "Discover various breeds of cats ready for adoption."
+    },
+    {
+      "id": 2,
+      "name": "Dogs",
+      "image": "https://i.ibb.co/Jr9J8Y5/pexels-monicore-253308.jpg",
+      "description": "Find loyal and friendly dogs looking for a new home."
+    },
+    {
+      "id": 3,
+      "name": "Rabbits",
+      "image": "https://i.ibb.co/zQTL4CW/pexels-pixabay-372166.jpg",
+      "description": "Cute and cuddly rabbits waiting to be adopted."
+    },
+    {
+      "id": 4,
+      "name": "Fish",
+      "image": "https://i.ibb.co/YBR1JCF/pexels-fahad-alani-789729-1677116.jpg",
+      "description": "Explore a variety of fish for your aquarium."
+    },
+    {
+      "id": 5,
+      "name": "Birds",
+      "image": "https://i.ibb.co/0JjsJpv/pexels-magda-ehlers-pexels-1599452.jpg",
+      "description": "Colorful and melodious birds available for adoption."
+    },
+    {
+      "id": 6,
+      "name": "Hamsters",
+      "image": "https://i.ibb.co/ys6mHdm/pexels-juris-freidenfelds-927897-2013665.jpg",
+      "description": "Adorable hamsters looking for a cozy home."
+    }
+   
+  ]
+  
