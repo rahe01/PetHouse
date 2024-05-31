@@ -12,9 +12,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HelmetProvider>
-    <AuthProvider>
+    {/* <div className='max-w-7xl mx-auto'> */}
+      <AuthProvider>
       <RouterProvider router={router} />
       <ToastContainer />
     </AuthProvider>
+    {/* </div> */}
   </HelmetProvider>
 )
