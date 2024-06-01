@@ -8,6 +8,8 @@ import DashBoardLayout from '../layouts/DashBoardLayout'
 
 import AddPet from '../components/DashBoard/User/AddPet'
 import MyAddPet from '../components/DashBoard/User/MyAddPet'
+import UpdatePet from '../components/DashBoard/User/UpdatePet'
+import DonationCampaign from '../components/DashBoard/User/DonationCampaign'
 
 
 export const router = createBrowserRouter([
@@ -34,9 +36,14 @@ export const router = createBrowserRouter([
       {
         path: 'my-added-pet',
         element: <MyAddPet></MyAddPet>
+      },
+      {
+        path: 'create-donation-campaign',
+        element: <DonationCampaign></DonationCampaign>
       }
     ]
   },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <SignUp /> },
+  {path: '/update-pet/:id', element : <UpdatePet></UpdatePet>}
 ])
