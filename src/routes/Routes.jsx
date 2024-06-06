@@ -10,6 +10,12 @@ import AddPet from '../components/DashBoard/User/AddPet'
 import MyAddPet from '../components/DashBoard/User/MyAddPet'
 import UpdatePet from '../components/DashBoard/User/UpdatePet'
 import DonationCampaign from '../components/DashBoard/User/DonationCampaign'
+import MyDonationCampain from '../../src/components/DashBoard/User/MyDonationCampain'
+import PetListing from '../components/Home/PetListing/PetListing'
+import PetDetails from '../components/Home/PetListing/PetDetails'
+import Donate from '../components/Home/Home/Donation/Donate'
+import DonationView from '../components/Home/Home/Donation/DonationView'
+
 
 
 export const router = createBrowserRouter([
@@ -22,6 +28,27 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
+      {
+        path : '/petListing',
+        element: <PetListing></PetListing>
+      },
+      {
+        path: '/petdetails/:id',
+       element: <PetDetails></PetDetails>,
+       loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/petsss/${params.id}`)
+        
+      
+       
+      },
+      {
+        path: '/donationCamp',
+        element: <Donate></Donate>
+      },
+      {
+        path: '/donationDetails/:id',
+        element: <DonationView></DonationView>,
+        loader : ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/donationsss/${params.id}`)
+      }
     
     ],
   },
@@ -40,7 +67,10 @@ export const router = createBrowserRouter([
       {
         path: 'create-donation-campaign',
         element: <DonationCampaign></DonationCampaign>
-      }
+      },
+      {
+      path: 'my-donation-campaign',
+      element: <MyDonationCampain></MyDonationCampain>},
     ]
   },
   { path: '/login', element: <Login /> },

@@ -34,17 +34,18 @@ const DonationCampaign = () => {
     setLoading(true);
 
     const form = e.target;
+    const petName = form.petName.value;
     const maxDonationAmount = form.maxDonationAmount.value;
     const lastDate = form.lastDate.value;
     const shortDescription = form.shortDescription.value;
     const longDescription = form.longDescription.value;
-
     const image = form.petPicture.files[0];
 
     try {
       const imageUrl = await imageUpload(image);
 
       const formData = {
+        petName, // Include pet name
         petPicture: imageUrl,
         maxDonationAmount,
         lastDate,
@@ -67,24 +68,28 @@ const DonationCampaign = () => {
       <h1 className="text-xl font-semibold mb-4">Create Donation Campaign</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
+          <label htmlFor="petName" className="block mb-1">Pet Name:</label>
+          <input id="petName" name="petName" type="text" className="border border-gray-300 p-2 w-full rounded-md" required />
+        </div>
+        <div className="mb-4">
           <label htmlFor="petPicture" className="block mb-1">Pet Picture:</label>
-          <input id="petPicture" name="petPicture" type="file" accept="image/*" className="border border-gray-300 p-2 w-full rounded-md" />
+          <input id="petPicture" name="petPicture" type="file" accept="image/*" className="border border-gray-300 p-2 w-full rounded-md" required />
         </div>
         <div className="mb-4">
           <label htmlFor="maxDonationAmount" className="block mb-1">Maximum Donation Amount:</label>
-          <input id="maxDonationAmount" name="maxDonationAmount" type="number" className="border border-gray-300 p-2 w-full rounded-md" />
+          <input id="maxDonationAmount" name="maxDonationAmount" type="number" className="border border-gray-300 p-2 w-full rounded-md" required />
         </div>
         <div className="mb-4">
           <label htmlFor="lastDate" className="block mb-1">Last Date of Donation:</label>
-          <input id="lastDate" name="lastDate" type="date" className="border border-gray-300 p-2 w-full rounded-md" />
+          <input id="lastDate" name="lastDate" type="date" className="border border-gray-300 p-2 w-full rounded-md" required />
         </div>
         <div className="mb-4">
           <label htmlFor="shortDescription" className="block mb-1">Short Description:</label>
-          <textarea id="shortDescription" name="shortDescription" className="border border-gray-300 p-2 w-full rounded-md"></textarea>
+          <textarea id="shortDescription" name="shortDescription" className="border border-gray-300 p-2 w-full rounded-md" required></textarea>
         </div>
         <div className="mb-4">
           <label htmlFor="longDescription" className="block mb-1">Long Description:</label>
-          <textarea id="longDescription" name="longDescription" className="border border-gray-300 p-2 w-full rounded-md"></textarea>
+          <textarea id="longDescription" name="longDescription" className="border border-gray-300 p-2 w-full rounded-md" required></textarea>
         </div>
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}

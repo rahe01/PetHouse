@@ -88,7 +88,7 @@ const PetForm = () => {
             // Replace with your API endpoint to save the pet data
             await axios.post(`${import.meta.env.VITE_API_URL}/pets`, petData);
             setSubmitting(false);
-            navigate('/');
+            navigate('my-added-pet');
             toast.success('Pet added successfully!');
           } catch (error) {
             console.error('Form submission error:', error);

@@ -26,7 +26,7 @@ const Navbar = () => {
     </NavLink>
       <NavLink 
       
-      to={"/"}
+      to={"/petListing"}
       className={({ isActive }) =>
         isActive
           ? "bg-[#5dbfec] px-4 py-3 hover:bg-neutral-100 transition font-semibold rounded-sm "
@@ -36,7 +36,7 @@ const Navbar = () => {
       
       >Pet Listing</NavLink>
       <NavLink
-       to={"/"}
+       to={"/donationCamp"}
        className={({ isActive }) =>
          isActive
            ? "bg-[#5dbfec] px-4 py-3 hover:bg-neutral-100 transition font-semibold rounded-sm "

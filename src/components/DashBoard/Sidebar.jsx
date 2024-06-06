@@ -103,7 +103,7 @@ const Sidebar = () => {
 
               <MenuItem
                 label=" My Donation Campaigns"
-                address="my-donation-campaigns"
+                address="my-donation-campaign"
                 icon={SiAlchemy}
               ></MenuItem>
               <MenuItem
