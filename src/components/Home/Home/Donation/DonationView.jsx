@@ -6,6 +6,9 @@ import { useLoaderData } from 'react-router-dom';
 const DonationView = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const data = useLoaderData();
+  const aderEmail = data.userEmail
+  const petPic = data.petPicture
+  const petName = data.petName
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -27,7 +30,7 @@ const DonationView = () => {
           Donate Now
         </button>
       </div>
-      {isModalOpen && <DonationModal closeModal={closeModal} />}
+      {isModalOpen && <DonationModal aderEmail={aderEmail} petName={petName} petPic={petPic}  closeModal={closeModal} />}
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Recommended Donations</h2>
         <RecommendedDonations />

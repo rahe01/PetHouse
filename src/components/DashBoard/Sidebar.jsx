@@ -9,14 +9,18 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { MdCreateNewFolder } from "react-icons/md";
 import { SiAlchemy } from "react-icons/si";
 import { FiUserCheck } from "react-icons/fi";
+import { PiUsersThreeFill } from "react-icons/pi";
+import { MdPets } from "react-icons/md";
 
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import MenuItem from "./MenuItem";
+import useRole from "../../useRole";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
+  const [role] = useRole()
   //   const [role, isLoading] = useRole();
   //   console.log(role, isLoading);
   //   const [toggle , setToggle] = useState(true);
@@ -108,9 +112,28 @@ const Sidebar = () => {
               ></MenuItem>
               <MenuItem
                 label="My Donations"
-                address="my-donations"
+                address="my-donates"
                 icon={FiUserCheck}
               ></MenuItem>
+            {
+              role === "admin" && (
+                <>
+                    <MenuItem
+                label="All Users"
+                address="all-users"
+                icon={PiUsersThreeFill}
+              ></MenuItem>
+
+              <MenuItem
+                label="All Pets"
+                address="all-pets"
+                icon={MdPets}
+              ></MenuItem>
+
+
+                </>
+              )
+            }
             </nav>
           </div>
         </div>

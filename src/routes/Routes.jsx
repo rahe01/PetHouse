@@ -15,6 +15,12 @@ import PetListing from '../components/Home/PetListing/PetListing'
 import PetDetails from '../components/Home/PetListing/PetDetails'
 import Donate from '../components/Home/Home/Donation/Donate'
 import DonationView from '../components/Home/Home/Donation/DonationView'
+import EditDonation from '../components/Home/Home/Donation/EditDonation'
+import MyDonate from '../components/DashBoard/User/MyDonate'
+import AdoptionRequest from '../components/DashBoard/User/AdoptionRequest'
+import Profile from '../components/Profile'
+import AllUsers from '../components/DashBoard/Admin/AllUsers'
+import AllPets from '../components/DashBoard/Admin/AllPets'
 
 
 
@@ -71,6 +77,32 @@ export const router = createBrowserRouter([
       {
       path: 'my-donation-campaign',
       element: <MyDonationCampain></MyDonationCampain>},
+      {
+        path: 'edit-donation-campaign/:id',
+        element: <EditDonation></EditDonation>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/donation-campaigns/${params.id}`)
+      },
+      {
+        path: 'my-donates',
+        element: <MyDonate></MyDonate>,
+        
+      },
+      {
+        path: 'adoption-request',
+        element : <AdoptionRequest></AdoptionRequest>
+      },
+      {
+        path: 'profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: 'all-users',
+        element: <AllUsers></AllUsers>
+      },
+      {
+        path: 'all-pets',
+        element: <AllPets></AllPets>
+      }
     ]
   },
   { path: '/login', element: <Login /> },

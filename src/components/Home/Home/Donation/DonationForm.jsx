@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import useAuth from '../../../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
-const DonationForm = ({ closeModal }) => {
+const DonationForm = ({ closeModal ,aderEmail ,petName,petPic }) => {
   const axiosSecure = useAxiosSecure();
   const stripe = useStripe();
   const elements = useElements();
@@ -11,6 +13,7 @@ const DonationForm = ({ closeModal }) => {
   const [processing, setProcessing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cardError, setCardError] = useState('');
+const {user} = useAuth()
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -69,6 +72,10 @@ const DonationForm = ({ closeModal }) => {
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
+      billing_details: {
+        email: user?.email,
+        name: user?.displayName,
+      },
     });
 
     if (error) {
@@ -93,13 +100,23 @@ const DonationForm = ({ closeModal }) => {
       console.log('Payment successful:', paymentIntent);
 
       try {
-        await axiosSecure.post(`${import.meta.env.VITE_API_URL}/donations`, {
+        await axiosSecure.post(`${import.meta.env.VITE_API_URL}/user-donate`, {
           amount,
           transactionId: paymentIntent.id,
           date: new Date(),
+          email: user?.email,
+          name: user?.displayName,
+          photo: user?.photoURL,
+          aderEmail: aderEmail,
+          petName : petName,
+          petPic: petPic,
+         
+
+
+         
         });
         closeModal();
-        alert('Donation successful!');
+       toast.success('Payment successful')
       } catch (err) {
         console.error('Error saving donation:', err);
       }

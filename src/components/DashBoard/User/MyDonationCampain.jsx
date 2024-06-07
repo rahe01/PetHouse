@@ -1,5 +1,5 @@
 // MyDonationCampaign.js
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -12,44 +12,34 @@ import {
   LinearProgress,
   Modal,
   Box,
-  Typography
-} from '@mui/material';
-import { Pause, Edit, Visibility } from '@mui/icons-material';
+  Typography,
+} from "@mui/material";
+import { Pause, Edit, Visibility } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const MyDonationCampain = () => {
-  const [donations, setDonations] = useState([
-  
-  ]);
+  const [donations, setDonations] = useState([]);
+  const {user} = useAuth()
 
   useEffect(() => {
-    
-    fetch(`${import.meta.env.VITE_API_URL}/donation-campaigns`)
-     .then(res => res.json())
-     .then(data => setDonations(data))
-     .catch(err => console.log(err));
-
-
-
-
-
-
-  },[])
-
-
-
-  
-
-
-
-
-
-
+    fetch(`${import.meta.env.VITE_API_URL}/donation-campaigns/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setDonations(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const [openDonators, setOpenDonators] = useState(false);
   const [selectedDonators, setSelectedDonators] = useState([]);
 
   const handlePause = (id) => {
-    setDonations(donations.map(donation => donation.id === id ? { ...donation, paused: !donation.paused } : donation));
+    setDonations(
+      donations.map((donation) =>
+        donation.id === id
+          ? { ...donation, paused: !donation.paused }
+          : donation
+      )
+    );
   };
 
   const handleViewDonators = (donators) => {
@@ -73,13 +63,16 @@ const MyDonationCampain = () => {
           </TableHead>
           <TableBody>
             {donations.map((donation) => (
-              <TableRow key={donation.id}>
+              <TableRow key={donation._id}>
                 <TableCell>{donation.petName}</TableCell>
                 <TableCell>{donation.maxDonationAmount}</TableCell>
                 <TableCell>
                   <LinearProgress
                     variant="determinate"
-                    value={(donation.currentAmount / donation.maxDonationAmount) * 100}
+                    value={
+                      (donation.currentAmount / donation.maxDonationAmount) *
+                      100
+                    }
                   />
                 </TableCell>
                 <TableCell>
@@ -91,21 +84,23 @@ const MyDonationCampain = () => {
                   >
                     {donation.paused ? "Unpause" : "Pause"}
                   </Button>
-                  <Button
-                    variant="contained"
-                    // color="default"
-                    startIcon={<Edit />}
-                    href={`/edit-donation/${donation.id}`}
-                    style={{ marginLeft: '10px' }}
+                  <Link
+                    to={`/dashboard/edit-donation-campaign/${donation._id}`}
                   >
-                    Edit
-                  </Button>
+                    <Button
+                      variant="contained"
+                      startIcon={<Edit />}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      Edit
+                    </Button>
+                  </Link>
                   <Button
                     variant="contained"
                     // color="primary"
                     startIcon={<Visibility />}
                     onClick={() => handleViewDonators(donation.donators)}
-                    style={{ marginLeft: '10px' }}
+                    style={{ marginLeft: "10px" }}
                   >
                     View Donators
                   </Button>
@@ -121,7 +116,19 @@ const MyDonationCampain = () => {
         onClose={handleClose}
         aria-labelledby="donators-modal-title"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', border: '2px solid ', boxShadow: 24, p: 4 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            border: "2px solid ",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
           <Typography id="donators-modal-title" variant="h6" component="h2">
             Donators
           </Typography>
