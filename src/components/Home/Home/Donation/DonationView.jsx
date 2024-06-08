@@ -9,6 +9,7 @@ const DonationView = () => {
   const aderEmail = data.userEmail
   const petPic = data.petPicture
   const petName = data.petName
+  const paused = data.paused
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -24,6 +25,7 @@ const DonationView = () => {
         <h1 className="text-2xl font-bold mb-4">Donation Campaign</h1>
         <p className="mb-4 text-gray-700">Max Donation Amount: ${data.maxDonationAmount}</p>
         <button
+        disabled={paused ? true : false}
           onClick={openModal}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
         >

@@ -35,7 +35,7 @@ const UpdatePet = () => {
   useEffect(() => {
     const fetchPetData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/pets/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/pets/${id}` ,{withCredentials: true});
         const petData = response.data;
         setInitialValues({
           petImage: petData.petImage,

@@ -23,7 +23,7 @@ const MyDonationCampain = () => {
   const {user} = useAuth()
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/donation-campaigns/${user.email}`)
+    fetch(`${import.meta.env.VITE_API_URL}/donation-campaigns/${user.email}` , { credentials: "include" })
       .then((res) => res.json())
       .then((data) => setDonations(data))
       .catch((err) => console.log(err));

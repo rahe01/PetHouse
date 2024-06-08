@@ -21,6 +21,9 @@ import AdoptionRequest from '../components/DashBoard/User/AdoptionRequest'
 import Profile from '../components/Profile'
 import AllUsers from '../components/DashBoard/Admin/AllUsers'
 import AllPets from '../components/DashBoard/Admin/AllPets'
+import AllDonation from '../components/DashBoard/Admin/AllDonation'
+import Edit from '../components/DashBoard/Admin/Edit'
+import PrivateRoute from './PrivateRoute'
 
 
 
@@ -36,7 +39,7 @@ export const router = createBrowserRouter([
       },
       {
         path : '/petListing',
-        element: <PetListing></PetListing>
+        element: <PrivateRoute><PetListing></PetListing></PrivateRoute>
       },
       {
         path: '/petdetails/:id',
@@ -48,11 +51,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/donationCamp',
-        element: <Donate></Donate>
+        element: <PrivateRoute><Donate></Donate></PrivateRoute>
       },
       {
         path: '/donationDetails/:id',
-        element: <DonationView></DonationView>,
+        element: <PrivateRoute><DonationView></DonationView></PrivateRoute>,
         loader : ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/donationsss/${params.id}`)
       }
     
@@ -60,48 +63,61 @@ export const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element:<DashBoardLayout></DashBoardLayout>,
+    element:<PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
-        element: <AddPet></AddPet>
+        element: <PrivateRoute><AddPet></AddPet></PrivateRoute>
       },
       {
         path: 'my-added-pet',
-        element: <MyAddPet></MyAddPet>
+        element: <PrivateRoute><MyAddPet></MyAddPet></PrivateRoute>
       },
       {
         path: 'create-donation-campaign',
-        element: <DonationCampaign></DonationCampaign>
+        element: <PrivateRoute><DonationCampaign></DonationCampaign></PrivateRoute>
       },
       {
       path: 'my-donation-campaign',
-      element: <MyDonationCampain></MyDonationCampain>},
+      element:<PrivateRoute> <MyDonationCampain></MyDonationCampain></PrivateRoute>
+    },
       {
         path: 'edit-donation-campaign/:id',
-        element: <EditDonation></EditDonation>,
+        element: <PrivateRoute><EditDonation></EditDonation></PrivateRoute>,
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/donation-campaigns/${params.id}`)
       },
       {
+
+        path: 'edit-pet/:id',
+        element:<PrivateRoute> <Edit></Edit></PrivateRoute>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/donation-camssssss/${params.id}`)
+
+      },
+      {
         path: 'my-donates',
-        element: <MyDonate></MyDonate>,
+        element: <PrivateRoute><MyDonate></MyDonate></PrivateRoute>,
         
       },
       {
         path: 'adoption-request',
-        element : <AdoptionRequest></AdoptionRequest>
+        element : <PrivateRoute> <AdoptionRequest></AdoptionRequest></PrivateRoute>
       },
       {
         path: 'profile',
-        element: <Profile></Profile>
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
       },
       {
         path: 'all-users',
-        element: <AllUsers></AllUsers>
+        element: <PrivateRoute><AllUsers></AllUsers></PrivateRoute>
       },
       {
         path: 'all-pets',
-        element: <AllPets></AllPets>
+        element: <PrivateRoute><AllPets></AllPets></PrivateRoute>
+      },
+      {
+        path: 'all-donations',
+        element: <PrivateRoute><AllDonation></AllDonation></PrivateRoute>
       }
     ]
   },

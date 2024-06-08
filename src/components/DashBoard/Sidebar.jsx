@@ -11,6 +11,7 @@ import { SiAlchemy } from "react-icons/si";
 import { FiUserCheck } from "react-icons/fi";
 import { PiUsersThreeFill } from "react-icons/pi";
 import { MdPets } from "react-icons/md";
+import { MdSnippetFolder } from "react-icons/md";
 
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -128,6 +129,11 @@ const Sidebar = () => {
                 label="All Pets"
                 address="all-pets"
                 icon={MdPets}
+              ></MenuItem>
+              <MenuItem
+                label="All Donations"
+                address="all-donations"
+                icon={MdSnippetFolder}
               ></MenuItem>
 
 

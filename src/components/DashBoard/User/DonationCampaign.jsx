@@ -6,6 +6,7 @@ import { axiosSecure } from "../../../hooks/useAxiosSecure";
 import { imageUpload } from "../../../Api";
 import useAuth from "../../../hooks/useAuth";
 
+
 const DonationCampaign = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -13,13 +14,13 @@ const DonationCampaign = () => {
 
   const mutation = useMutation({
     mutationFn: async (formData) => {
-      const { data } = await axiosSecure.post('/donation-campaigns', formData);
+      const { data } = await axiosSecure.post('/donation-campaigns', formData ,{withCredentials: true});
       return data;
     },
     onSuccess: () => {
       console.log("Data Saved Successfully");
       toast.success("Donation Campaign Created Successfully!");
-      navigate('/dashboard/my-listings');
+      navigate('/dashboard/my-donation-campaign');
       setLoading(false);
     },
     onError: (error) => {
@@ -61,6 +62,7 @@ const DonationCampaign = () => {
       console.error("Error uploading image or saving donation campaign:", error);
       setLoading(false);
     }
+    
   };
 
   return (

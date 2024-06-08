@@ -12,6 +12,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const columnHelper = createColumnHelper();
 
@@ -96,7 +97,10 @@ function MyAddPetForm() {
     if (user?.email) {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/my-pets/${user.email}`
+          `${import.meta.env.VITE_API_URL}/my-pets/${user.email}`,
+          {
+            credentials: "include", // Ensures credentials such as cookies are included
+          }
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -158,7 +162,7 @@ function MyAddPetForm() {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (error) {
