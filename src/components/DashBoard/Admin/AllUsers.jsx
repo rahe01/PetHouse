@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
-import useRole from '../../../useRole';
+
 
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
     const axiosSecure = useAxiosSecure();
-    const [role ] = useRole()
+    
 
     useEffect(() => {
-        axiosSecure.get('/users')  // Replace with your API endpoint
+        axiosSecure.get('/users' ,{withCredentials: true})  
             .then(response => setUsers(response.data))
             .catch(error => console.error('Error fetching users:', error));
     }, [axiosSecure]);
 
     const makeAdmin = (userId) => {
-        axiosSecure.put(`/admin/${userId}`)  // Replace with your API endpoint
+        axiosSecure.put(`/admin/${userId}` ,{withCredentials: true})  
             .then(response => {
                 if (response.data.success) {
                     setUsers(users.map(user => user._id === userId ? { ...user, role: 'admin' } : user));
@@ -52,7 +52,7 @@ const AllUsers = () => {
                                 <td className="py-2 px-4 border-b border-gray-200">
                                     {user.role !== 'admin' && (
                                         <button 
-                                        disabled= {role == 'admin'}
+                                           
                                             onClick={() => makeAdmin(user._id)} 
                                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                         >
